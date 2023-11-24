@@ -6,11 +6,11 @@
 /*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 12:32:32 by vharatyk          #+#    #+#             */
-/*   Updated: 2023/11/24 13:43:02 by vharatyk         ###   ########.fr       */
+/*   Updated: 2023/11/24 18:15:42 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include"minitalk.h"
+#include "minitalk.h"
 
 void	ft_putnbr_fd(int n, int fd)
 {
@@ -32,19 +32,47 @@ void	ft_putnbr_fd(int n, int fd)
 			ft_putchar_fd(n + '0', fd);
 	}
 }
-void ft_putchar_fd(int c,int fd)
+
+void	ft_putchar_fd(int c, int fd)
 {
-write(1,&c,fd);
+	write(1, &c, fd);
 }
 
-int ft_strlen(char *str)
+int	ft_strlen(char *str)
 {
-	int i;
+	int	i;
 
 	i = 0 ;
 	while (str[i])
-		{
+	{
 		i++;
-		}
+	}
 	return (i);
+}
+
+void	*ft_calloc(size_t elementCount, size_t elementSize)
+{
+	void	*value;
+
+	value = (void *)malloc(elementCount * elementSize);
+	if (!value)
+		exit(0);
+	ft_bzero (value, elementSize * elementCount);
+	return (value);
+}
+
+void	ft_bzero(void *str, size_t count)
+{
+	unsigned char	*string;
+	size_t			i;
+
+	if (count == 0)
+		return ;
+	i = 0;
+	string = str;
+	while (i < count)
+	{
+		string[i] = 0;
+		i++;
+	}
 }
