@@ -6,12 +6,12 @@
 /*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 16:40:31 by vharatyk          #+#    #+#             */
-/*   Updated: 2023/11/23 16:40:34 by vharatyk         ###   ########.fr       */
+/*   Updated: 2023/11/24 15:50:09 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
-#include"minioutils.h"
+#include"minitalk.h"
 
 
 static void convert_int(int sig, int *len)
@@ -26,29 +26,15 @@ static void convert_int(int sig, int *len)
     {
         bit = 0 ;
         *len = len_total ;
+        len_total = 0;
     }
 }
-// static void get_line_reset(char **str , int *len , int c  )
-// {
-//     static int  i = 0;
-//     int j ;
-//     write(1,&c,1);
-//     *str[i] = c;
-//     if(c == 0)
-//     {
-//         j=0;
-//         write(1,&(*str)[j],1);
-//         i = 0;
-//         while((str)[j])
-//         {
-//             write(1,"S>",2);
-//             write(1,(str)[j++],1);
-//         }
-//         *len = 0;
-//         // free(str);
-//         // *str = 0 ;
-//     }
-// }
+static void convert_char(int sig , )
+{
+
+
+
+}
 
 
 static void convert_message (int sig)
@@ -60,11 +46,15 @@ static void convert_message (int sig)
     static int count = 0;
 
     if(len == 0)
+    {
         convert_int( sig, &len);
+    }
+
     else
     {
         if (str == NULL)
-            str = calloc(len, sizeof(*str));
+            str = calloc(len, sizeof(str));//fonction a inplenter
+
         if(sig == SIGUSR1)
             c += 1 <<(7 - bit);
         bit++ ;
@@ -75,10 +65,14 @@ static void convert_message (int sig)
             count++;
             c = 0;
         }
+
         if (count == len)
         {
             write(1, str, len);
+            write(1,"\n",1);
             free(str);
+            len = 0 ;
+            str = NULL;
             count = 0;
         }
     }
@@ -87,17 +81,18 @@ static void convert_message (int sig)
 
 int main (int argc , char **argv)
     {
-        if(argc != 1 )
+        if(argc != 1  || argv[1] != 0)
         {
-            printf(" ERROR :IS SERVOR");
+            write(1,"ERROR :IS SERVOR",17);
             return(0);
         }
     write(1,"PID :",5);
     ft_putnbr_fd( getpid(), 1);
+    write(1,"\n",1);
     signal(SIGUSR1 ,convert_message );
     signal(SIGUSR2 ,convert_message );
     while(1)
-        usleep(500);
+        usleep(SPEED);
 
     return(0);
     }

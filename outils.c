@@ -6,11 +6,11 @@
 /*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 12:32:32 by vharatyk          #+#    #+#             */
-/*   Updated: 2023/11/23 16:42:47 by vharatyk         ###   ########.fr       */
+/*   Updated: 2023/11/24 13:43:02 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include"minioutils.h"
+#include"minitalk.h"
 
 void	ft_putnbr_fd(int n, int fd)
 {
@@ -34,7 +34,17 @@ void	ft_putnbr_fd(int n, int fd)
 }
 void ft_putchar_fd(int c,int fd)
 {
-write(1,&c,1);
-
+write(1,&c,fd);
 }
 
+int ft_strlen(char *str)
+{
+	int i;
+
+	i = 0 ;
+	while (str[i])
+		{
+		i++;
+		}
+	return (i);
+}

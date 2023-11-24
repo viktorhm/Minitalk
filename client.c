@@ -6,19 +6,12 @@
 /*   By: vharatyk <vharatyk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 12:41:07 by vharatyk          #+#    #+#             */
-/*   Updated: 2023/11/23 15:16:33 by vharatyk         ###   ########.fr       */
+/*   Updated: 2023/11/24 15:32:19 by vharatyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include"minitalk.h"
 
-
-#include<signal.h>
-#include<stdlib.h>
-#include<stdio.h>
-#include<unistd.h>
-#include<string.h>
-
-#define SPEED 500
 
 // check PID
 static int is_nubers(char *argv)
@@ -108,8 +101,7 @@ int main (int argc ,char** argv)
         pid = atoi(argv[1]);
         str = argv[2];
         i = 0;
-        len = strlen(str) + 2;
-        str[len] = '\0';
+        len = ft_strlen(str);
 
         send_len(len , pid);
 
@@ -117,10 +109,8 @@ int main (int argc ,char** argv)
         {
             send_octet(str[i++] , pid );
         }
-        send_octet(str[i++] , pid ); // renvoie le dernier le retour chariot
-        send_octet('\n', pid); // retour a la ligne
-
-
+        //send_octet(str[i++] , pid ); // renvoie le dernier le retour chariot
+        //send_octet('\n', pid); // retour a la ligne
 
     }
     //free(str);
