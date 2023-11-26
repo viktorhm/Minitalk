@@ -50,7 +50,7 @@ static void	convert_message(int sig)
 		convert_int(sig, &len);
 	else
 	{
-		if (str == NULL)
+		if (str == NULL || len < 1)
 			str = ft_calloc(len, sizeof(str));
 		if (sig == SIGUSR1)
 			c += 1 << (7 - bit);

@@ -12,7 +12,7 @@
 
 #ifndef MINITALK_H
 # define MINITALK_H
-# define SPEED 200
+# define SPEED 100
 # include <unistd.h>
 # include <signal.h>
 # include <stdlib.h>
