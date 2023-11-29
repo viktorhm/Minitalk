@@ -1,39 +1,26 @@
-NAME = Minitalk.a
+CFLAGC = -Wall -Wextra -Werror
+CC = gcc
 
-C_SRC = client.c
-S_SRC = server.c
-SRC = outils.c atoi.c
-HADER_FILE = minitalk.h
+c_src = outils.c atoi.c
+c_obj=$(c_src:.c=.o)
 
+server = server 
+client = client
 
-OBJS = ${SRC:.c=.o}
+all: $(server) $(client)
 
-
-CC		= cc
-RM		= rm -f
-
-CFLAGS = -Wall -Wextra -Werror
-all:	${NAME}
-
-.c.o:
-		${CC} ${CFLAGS} -g -c $< -o ${<:.c=.o}
-
-$(NAME): client server
-
-client : $(C_SRC) $(HADER_FILE)
-	$(CC) $(CFLAGS) $(C_SRC) $(SRC) -o client
-
-server : $(S_SRC) $(HADER_FILE)
-	$(CC) $(CFLAGS) $(S_SRC) $(SRC) -o server
+bonus:$(server_bonus) $(client_bonus)
 
 
+$(server):$(c_obj) minitalk.h
+	$(CC) $(CFLAGS) server.c $(c_obj) -o $(server)
+$(client):$(c_obj) minitalk.h
+	$(CC) $(CFLAGS) client.c $(c_obj) -o $(client)
+%.o:%.c
+	$(CC) $(CFLAGS) -c $^ -o $@
 
 clean:
-		${RM} ${OBJS} ${OBJSBONUS}
-
-fclean:	clean
-		${RM} ${NAME}
-
-re:		fclean all
-
-.PHONY: all minitalk server client clean fclean re libft
+	rm -rf $(c_obj) $(cb_obj)
+fclean: clean
+	rm -rf $(client) $(server)
+re: fclean all
